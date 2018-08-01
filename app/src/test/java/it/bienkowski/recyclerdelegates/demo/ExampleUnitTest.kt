@@ -1,4 +1,4 @@
-package it.bienkowski.recyclerdelegates
+package it.bienkowski.recyclerdelegates.demo
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

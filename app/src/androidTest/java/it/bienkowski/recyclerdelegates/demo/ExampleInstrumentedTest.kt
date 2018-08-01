@@ -1,4 +1,4 @@
-package it.bienkowski.recyclerdelegates
+package it.bienkowski.recyclerdelegates.demo
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

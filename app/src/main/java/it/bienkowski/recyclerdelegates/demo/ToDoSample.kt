@@ -1,4 +1,4 @@
-package it.bienkowski.recyclerdelegates
+package it.bienkowski.recyclerdelegates.demo
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -12,6 +12,8 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import it.bienkowski.recyclerdelegates.DelegatingRecyclerAdapter
+
 import it.bienkowski.recyclerdelegates.delegates.BaseRecyclerDelegate
 import it.bienkowski.recyclerdelegates.delegates.StaticLayoutDelegate
 import it.bienkowski.recyclerdelegates.managers.SimpleDelegateManager
