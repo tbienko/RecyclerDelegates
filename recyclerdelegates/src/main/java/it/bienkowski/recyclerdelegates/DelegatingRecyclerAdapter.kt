@@ -20,14 +20,14 @@ class DelegatingRecyclerAdapter<I : Any>(
             .dispatchUpdatesTo(this)
     }
 
-    fun submitItems(items: List<I>) {
+    fun submitList(items: List<I>) {
         modifyItems {
             clear()
             addAll(items)
         }
     }
 
-    fun submitItems(vararg items: I) = submitItems(items.toList())
+    fun submitItems(vararg items: I) = submitList(items.toList())
 
     override fun getItemCount(): Int = items.size
 
