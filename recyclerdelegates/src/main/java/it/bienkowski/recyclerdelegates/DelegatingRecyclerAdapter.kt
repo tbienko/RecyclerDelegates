@@ -13,20 +13,13 @@ class DelegatingRecyclerAdapter<I : Any>(
 
     val items: MutableList<I> = mutableListOf()
 
-    fun modifyItems(block: MutableList<I>.() -> Unit) {
-        val oldItems = items.toList() //copy to have old items access
-        block(items)
-        DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, oldItems, items))
-            .dispatchUpdatesTo(this)
+    fun submitList(newItems: List<I>) {
+        DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, items, newItems)).dispatchUpdatesTo(this)
+        items.clear()
+        items.addAll(newItems)
     }
 
-    fun submitList(items: List<I>) {
-        modifyItems {
-            clear()
-            addAll(items)
-        }
-    }
-
+    @Deprecated("use submitList instead")
     fun submitItems(vararg items: I) = submitList(items.toList())
 
     override fun getItemCount(): Int = items.size
