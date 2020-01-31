@@ -145,24 +145,28 @@ class ToDoSampleActivity : AppCompatActivity(), TodoItemDelegate.Listeners {
     // Next helper function to replace TodoItems on list.
     // We're using immutable data model and do not use positions so it's bit harder to do it
     private fun replaceItem(uuid: UUID, newItem: TodoItem) {
-        adapter.modifyItems {
-            val index = indexOfFirst {
-                when (it) {
-                    is TodoItem -> it.uuid == uuid
-                    else -> false
+        adapter.submitList(
+            adapter.items.toMutableList().apply {
+                val index = indexOfFirst {
+                    when (it) {
+                        is TodoItem -> it.uuid == uuid
+                        else -> false
+                    }
                 }
+                set(index, newItem)
             }
-            set(index, newItem)
-        }
+        )
     }
 
     // There's how we add new items, thanks to helper functions it's quite easy
     private fun addTodoItem() {
         showEditTextDialog("") { name ->
-            adapter.modifyItems {
-                removeAll { it is EmptyItem }
-                add(TodoItem(UUID.randomUUID(), name, false))
-            }
+            adapter.submitList(
+                adapter.items.toMutableList().apply {
+                    removeAll { it is EmptyItem }
+                    add(TodoItem(UUID.randomUUID(), name, false))
+                }
+            )
         }
     }
 
@@ -180,17 +184,18 @@ class ToDoSampleActivity : AppCompatActivity(), TodoItemDelegate.Listeners {
 
     // User can delete completed tasks
     private fun deleteCompletedTasks() {
-        adapter.modifyItems {
-            val iterator = listIterator()
-            for (item in iterator) {
-                if (item is TodoItem && item.completed) {
-                    iterator.remove()
+        adapter.submitList(
+            adapter.items.toMutableList().apply {
+                val iterator = listIterator()
+                for (item in iterator) {
+                    if (item is TodoItem && item.completed) {
+                        iterator.remove()
+                    }
+                }
+                if (isEmpty()) {
+                    add(EmptyItem())
                 }
             }
-
-            if (isEmpty()) {
-                add(EmptyItem())
-            }
-        }
+        )
     }
 }
