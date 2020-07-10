@@ -11,12 +11,16 @@ class DelegatingRecyclerAdapter<I : Any>(
     private val manager: RecyclerDelegateManager<I>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val items: MutableList<I> = mutableListOf()
+    private var mutableItems: List<I> = listOf()
+
+    val items : List<I>
+    get() = mutableItems
+
 
     fun submitList(newItems: List<I>) {
-        DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, items, newItems)).dispatchUpdatesTo(this)
-        items.clear()
-        items.addAll(newItems)
+        val oldItems = mutableItems
+        mutableItems = newItems
+        DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, oldItems, newItems)).dispatchUpdatesTo(this)
     }
 
     @Deprecated("use submitList instead")
