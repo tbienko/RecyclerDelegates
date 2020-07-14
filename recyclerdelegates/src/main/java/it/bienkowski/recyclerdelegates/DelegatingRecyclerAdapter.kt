@@ -1,8 +1,9 @@
 package it.bienkowski.recyclerdelegates
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * [RecyclerView.Adapter] which delegate operations to [RecyclerDelegateManager]
@@ -11,20 +12,16 @@ class DelegatingRecyclerAdapter<I : Any>(
     private val manager: RecyclerDelegateManager<I>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var mutableItems: List<I> = listOf()
+    private var internalItems: List<I> = listOf()
 
-    val items : List<I>
-    get() = mutableItems
-
+    val items: List<I>
+        get() = internalItems
 
     fun submitList(newItems: List<I>) {
-        val oldItems = mutableItems
-        mutableItems = newItems
-        DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, oldItems, newItems)).dispatchUpdatesTo(this)
+        val diff = DiffUtil.calculateDiff(DelegatingDiffUtilCallback(manager, internalItems, newItems))
+        internalItems = newItems
+        diff.dispatchUpdatesTo(this)
     }
-
-    @Deprecated("use submitList instead")
-    fun submitItems(vararg items: I) = submitList(items.toList())
 
     override fun getItemCount(): Int = items.size
 

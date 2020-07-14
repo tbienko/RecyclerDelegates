@@ -1,6 +1,7 @@
 package it.bienkowski.recyclerdelegates
 
-import android.support.v7.util.DiffUtil
+import androidx.recyclerview.widget.DiffUtil
+
 
 /**
  * [DiffUtil.Callback] implementation comparing items using

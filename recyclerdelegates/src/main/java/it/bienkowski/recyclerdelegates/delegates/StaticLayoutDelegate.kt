@@ -1,7 +1,7 @@
 package it.bienkowski.recyclerdelegates.delegates
 
-import android.support.annotation.LayoutRes
 import android.view.View
+import androidx.annotation.LayoutRes
 
 /**
  * Simple delegate which may be used to display static layouts

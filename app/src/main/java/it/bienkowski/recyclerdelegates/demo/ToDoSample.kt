@@ -1,17 +1,17 @@
 package it.bienkowski.recyclerdelegates.demo
 
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import it.bienkowski.recyclerdelegates.DelegatingRecyclerAdapter
 
 import it.bienkowski.recyclerdelegates.delegates.BaseRecyclerDelegate
@@ -108,7 +108,7 @@ class ToDoSampleActivity : AppCompatActivity(), TodoItemDelegate.Listeners {
         fab.setOnClickListener { addTodoItem() }
 
         // On start we show EmptyItem, modifyItems calls are passed through DiffUtil
-        adapter.submitItems(EmptyItem())
+        adapter.submitList(listOf(EmptyItem()))
     }
 
     // Menu to add "delete completed menu"
@@ -136,9 +136,9 @@ class ToDoSampleActivity : AppCompatActivity(), TodoItemDelegate.Listeners {
 
         AlertDialog.Builder(this)
             .setView(editText)
-            .setPositiveButton("SAVE", { _, _ ->
+            .setPositiveButton("SAVE") { _, _ ->
                 callback(editText.text.toString())
-            })
+            }
             .show()
     }
 

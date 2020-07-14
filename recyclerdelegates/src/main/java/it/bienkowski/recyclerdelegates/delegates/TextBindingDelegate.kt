@@ -1,8 +1,8 @@
 package it.bienkowski.recyclerdelegates.delegates
 
-import android.support.annotation.LayoutRes
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 
 /**
  * Simple delegate which may be used to display static text layouts.
@@ -26,5 +26,6 @@ class TextBindingDelegate<in I>(
             holder.itemView.findViewById<TextView>(id).text = text
         }
     }
+
     override fun createViewHolder(view: View) = MinimalHolder(view)
 }

@@ -5,11 +5,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.tbienko'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         def versionMajor = 1
-        def versionMinor = 0
+        def versionMinor = 1
         def versionPatch = 0
 
         versionCode versionMajor * 1000000 + versionMinor * 1000 + versionPatch
@@ -17,9 +17,9 @@ android {
 
         //noinspection MinSdkTooLow
         minSdkVersion 7
-        targetSdkVersion 28
+        targetSdkVersion 29
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -33,13 +33,13 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api 'com.android.support:recyclerview-v7:28.0.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
 
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'io.mockk:mockk:1.7.15'
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'io.mockk:mockk:1.10.0'
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -1,10 +1,14 @@
 package it.bienkowski.recyclerdelegates
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.mockkStatic
 import io.mockk.verify
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
+import org.junit.Before
 import org.junit.Test
 
 class DelegatingRecyclerAdapterTest {
@@ -13,12 +17,18 @@ class DelegatingRecyclerAdapterTest {
 
     private val holderMock: RecyclerView.ViewHolder = mockk(relaxed = true)
 
+    @Before
+    fun before() {
+        mockkStatic(DiffUtil::class)
+        every { DiffUtil.calculateDiff(any()) } returns mockk(relaxed = true)
+    }
+
     @Test
     fun getItemCount() {
         val adapter = createAdapterWithItems(emptyList())
         assertEquals(0, adapter.itemCount)
 
-        adapter.items.add("test")
+        adapter.submitList(listOf("test"))
         assertEquals(1, adapter.itemCount)
     }
 
@@ -106,6 +116,6 @@ class DelegatingRecyclerAdapterTest {
 
     private fun createAdapterWithItems(items: List<String>) =
         DelegatingRecyclerAdapter(managerMock).apply {
-            this.items.addAll(items)
+            submitList(items)
         }
 }

@@ -1,7 +1,7 @@
 package it.bienkowski.recyclerdelegates.managers
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import it.bienkowski.recyclerdelegates.RecyclerDelegate
 import it.bienkowski.recyclerdelegates.RecyclerDelegateManager
 

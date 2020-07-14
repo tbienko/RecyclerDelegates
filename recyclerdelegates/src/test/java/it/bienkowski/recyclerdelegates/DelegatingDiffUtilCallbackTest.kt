@@ -2,7 +2,7 @@ package it.bienkowski.recyclerdelegates
 
 import io.mockk.mockk
 import io.mockk.verify
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class DelegatingDiffUtilCallbackTest {

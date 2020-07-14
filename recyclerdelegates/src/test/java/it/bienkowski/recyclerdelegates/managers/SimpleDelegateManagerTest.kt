@@ -1,12 +1,12 @@
 package it.bienkowski.recyclerdelegates.managers
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import it.bienkowski.recyclerdelegates.RecyclerDelegate
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.math.BigDecimal
